@@ -20,17 +20,17 @@ class QuotationSubmitted extends Mailable
         $this->prescription = $prescription;
     }
 
-    // public function build()
-    // {
-    //     return $this->subject('Your Prescription Quotation')
-    //                 ->view('emails.quotation_submitted');
-    // }
-
     public function build()
-{
-    return $this->subject('Test Email')
-                ->view('emails.test'); // Test view
-}
+    {
+        
+                    return $this->view('emails.quotation_submitted')
+                    ->with([
+                        'prescription' => $this->prescription,
+                    ]);             
+    }
+
+
+
 }
 
 

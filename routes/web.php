@@ -34,6 +34,10 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/prescriptions/create', [PrescriptionController::class, 'create'])->name('prescriptions.create');
     Route::post('/prescriptions', [PrescriptionController::class, 'store'])->name('prescriptions.store');
+    Route::get('/prescriptions/index', [PrescriptionController::class, 'index'])->name('prescriptions.index');
+    Route::post('/prescription/items/{id}/update-status', [PrescriptionController::class, 'updateStatus'])
+    ->name('prescription.items.updateStatus');
+
 });
 
 Route::middleware(['auth', 'pharmacy'])->group(function () {

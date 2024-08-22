@@ -7,12 +7,24 @@ use App\Models\PrescriptionImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Models\PrescriptionItem;
+
 
 class PrescriptionController extends Controller
 {
     public function create()
     {
         return view('prescriptions.create');
+    }
+
+    public function index()
+    {
+        $user_id = auth()->id();
+        $prescriptions = Prescription::where('user_id', $user_id)
+        ->with('items') // Eager load the items relationship
+        ->get();
+
+        return view('prescriptions.index', ['prescriptions' => $prescriptions]);
     }
 
     public function store(Request $request)
@@ -43,5 +55,14 @@ class PrescriptionController extends Controller
         }
 
         return redirect()->route('prescriptions.create')->with('success', 'Prescription uploaded successfully!');
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $item = PrescriptionItem::findOrFail($id);
+        $item->status = $request->input('status');
+        $item->save();
+
+        return redirect()->back()->with('status', 'Item status updated!');
     }
 }

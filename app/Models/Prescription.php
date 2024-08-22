@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\PrescriptionItem;
 
 class Prescription extends Model
 {
@@ -26,6 +27,10 @@ class Prescription extends Model
     public function images()
     {
         return $this->hasMany(PrescriptionImage::class);
+    }
+    public function items()
+    {
+        return $this->hasMany(PrescriptionItem::class);
     }
 }
 

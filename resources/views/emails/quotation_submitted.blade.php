@@ -1,4 +1,4 @@
-@component('mail::message')
+@dd($prescription);
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,9 +33,7 @@
 
     <p>Thank you for using our service.</p>
 
-    <a href="{{ route('pharmacy.prescriptions.show', $prescription->id) }}" class="button">View Prescription</a>
 
-    <p>Thanks,<br>{{ config('app.name') }}</p>
+    <p>Thanks</p>
 </body>
 </html>
-@endcomponent
